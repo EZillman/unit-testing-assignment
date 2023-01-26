@@ -62,7 +62,7 @@ function toggleTodo(todo: Todo) {
   createHtml(todos);
 }
 
-function displayError(error: string, show: boolean) {
+export function displayError(error: string, show: boolean) {
   let errorContainer: HTMLDivElement = document.getElementById(
     "error"
   ) as HTMLDivElement;
@@ -81,4 +81,4 @@ function clearTodos(todos: Todo[]) {
   createHtml(todos);
 }
 
-createHtml(todos);
+//createHtml(todos);
