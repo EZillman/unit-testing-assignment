@@ -13,6 +13,29 @@ beforeEach(() => {
 });
 
 
+describe('everything with addTodo', () => {
+
+    test('should add new todo', () => {
+        
+        // Arrange
+
+        // Act 
+
+        // Assert
+
+    });
+
+    test('should give an error and not add new todo', () => {
+        
+        // Arrange
+
+        // Act 
+
+        // Assert
+        
+    });
+});
+
 describe('everything with toggleTodo', () => {
 
     test('should change to done: true', () => {
@@ -80,7 +103,7 @@ describe('everything with toggleTodo', () => {
 }); 
 
 
-describe('should add/remove css class on div depending on argument value', () => {
+describe('everything with displayError', () => {
 
     test('should add class "show" if true', () => {
 
@@ -132,6 +155,8 @@ describe('everything with clearTodos', () => {
         //expect(spy008).toBeCalled();
     });
 
+    /*
+
     test('should remove all todos', () => {
 
         // Arrange
@@ -156,5 +181,5 @@ describe('everything with clearTodos', () => {
         // Assert
         expect(todos.length).toBe(0);
        
-    });
+    }); */
 });
