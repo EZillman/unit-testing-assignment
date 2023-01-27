@@ -5,6 +5,11 @@
 import * as functions from '../ts/functions';
 import { Todo } from '../ts/models/Todo';
 
+beforeEach(() => {
+    document.body.innerHTML = "";
+});
+
+
 describe('everything with addTodo', () => {
 
     test('should return success true', () => {
@@ -89,6 +94,8 @@ describe('everything with changeTodo', () => {
     }); 
 
 });
+
+
 
  describe('everything with removeAllTodos', () => {
 
