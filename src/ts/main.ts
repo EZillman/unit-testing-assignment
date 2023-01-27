@@ -38,7 +38,7 @@ export function createHtml(todos: Todo[]) {
     "todos"
   ) as HTMLUListElement;
 
-  //todosContainer.innerHTML = "";
+  // todosContainer.innerHTML = "";
 
   for (let i = 0; i < todos.length; i++) {
     let li: HTMLLIElement = document.createElement("li");
@@ -59,7 +59,7 @@ export function createHtml(todos: Todo[]) {
 
 export function toggleTodo(todo: Todo) {
   changeTodo(todo);
-  createHtml(todos);
+  exports.createHtml(todos);
 }
 
 export function displayError(error: string, show: boolean) {
@@ -78,7 +78,7 @@ export function displayError(error: string, show: boolean) {
 
 export function clearTodos(todos: Todo[]) {
   removeAllTodos(todos);
-  createHtml(todos);
+  exports.createHtml(todos);
 }
 
 //createHtml(todos);

@@ -4,8 +4,6 @@
 
 import * as main from '../ts/main';
 import * as functions from '../ts/functions';
-//import { displayError } from './../ts/main';
-//import { clearTodos } from './../ts/main';
 import { Todo } from '../ts/models/Todo';
 
 beforeEach(() => {
@@ -13,94 +11,60 @@ beforeEach(() => {
 });
 
 
-describe('everything with addTodo', () => {
+describe('everything with createNewTodo', () => {
+    
+    test('should create new todo', () => {
 
-    test('should add new todo', () => {
-        
         // Arrange
+	    document.body.innerHTML = `<ul id="todos" class="todo"></ul>`;
 
-        // Act 
+	    const todoText = 'crossiant';
+	    const todos: Todo[] = [];
+
+        // Act
+	    main.createNewTodo(todoText, todos);
 
         // Assert
-
+	    expect(document.querySelector('#todos')?.innerHTML).toEqual(`<li class="todo__text">${todoText}</li>`);
     });
 
-    test('should give an error and not add new todo', () => {
-        
-        // Arrange
+    test('should not create new todo', () => {
 
-        // Act 
+        // Arrange
+	    document.body.innerHTML = '<div id="error" class="error"></div>' + '<ul id="todos" class="todo"></ul>';
+
+	    const todoText = 'm';
+	    const todos: Todo[] = [];
+
+        // Act
+	    main.createNewTodo(todoText, todos);
 
         // Assert
-        
+	    expect(document.querySelector('#error')?.classList.contains('show')).toBeTruthy();
     });
+    
 });
 
+
+
 describe('everything with toggleTodo', () => {
-
-    test('should change to done: true', () => {
-
-        // Arrange
-        document.body.innerHTML =
-		'<ul id="todos" class="todo">' +
-		'<li class="todo__text">Mock todo 1</li>' +
-		'<li class="todo__text">Mock todo 2</li>' +
-		'<li class="todo__text">Mock todo 3</li>' +
-		'</ul>';
-
-	    const todos: Todo[] = [
-		    { text: 'Mock todo 1', done: false },
-		    { text: 'Mock todo 2', done: false },
-		    { text: 'Mock todo 3', done: false },
-	    ];
-
-
-        // Act
-        functions.changeTodo(todos[0]);
-    
-        // Assert
-        expect(todos[0]).toStrictEqual({'done': true, 'text': 'Mock todo 1'});
-    });
-
-    
-    test('should change to done: false', () => {
-
-        // Arrange
-        document.body.innerHTML =
-		'<ul id="todos" class="todo">' +
-		'<li class="todo__text">Mock todo 1</li>' +
-		'<li class="todo__text">Mock todo 2</li>' +
-		'<li class="todo__text">Mock todo 3</li>' +
-		'</ul>';
-
-	    const todos: Todo[] = [
-		    { text: 'Mock todo 1', done: true },
-		    { text: 'Mock todo 2', done: true },
-		    { text: 'Mock todo 3', done: true },
-	    ];
-
-        // Act
-        functions.changeTodo(todos[0]);
-    
-        // Assert
-        expect(todos[0]).toStrictEqual({'done': false, 'text': 'Mock todo 1'});
-    }); 
 
     test('should call changeTodo & createHtml', () => {
 
         // Arrange
         let someTodo: Todo = {text: 'fly', done: true};
         let spyder = jest.spyOn(functions, 'changeTodo').mockReturnValue();;
-        //let roach = jest.spyOn(main, 'createHtml').mockReturnValue();
+        let roach = jest.spyOn(main, 'createHtml').mockReturnValue();
 
         // Act
         main.toggleTodo(someTodo);
 
         // Assert
         expect(spyder).toHaveBeenCalled();
-        //expect(roach).toHaveBeenCalled();
+        expect(roach).toHaveBeenCalled();
     });
 }); 
+
 
 
 describe('everything with displayError', () => {
@@ -120,6 +84,7 @@ describe('everything with displayError', () => {
         expect(result.classList.contains('show')).toBe(true);
     });
 
+
     test('should remove class "show" if false', () => {
 
         // Arrange
@@ -137,6 +102,7 @@ describe('everything with displayError', () => {
 });
 
 
+
 describe('everything with clearTodos', () => {
 
     test('should call removeAllTodos & createHtml', () => {
@@ -145,41 +111,14 @@ describe('everything with clearTodos', () => {
         let todos: Todo[] = [];
 
         let spy01 = jest.spyOn(functions, 'removeAllTodos').mockReturnValue();
-        //let spy008 = jest.spyOn(main, 'createHtml').mockReturnValue();
+        let spy02 = jest.spyOn(main, 'createHtml').mockReturnValue();
         
         // Act
         main.clearTodos(todos);
 
         // Assert
         expect(spy01).toHaveBeenCalled();
-        //expect(spy008).toBeCalled();
+        expect(spy02).toBeCalled();
     });
 
-    /*
-
-    test('should remove all todos', () => {
-
-        // Arrange
-        document.body.innerHTML = 		
-        '<ul id="todos" class="todo">' +
-		'<li class="todo__text">Mock todo 1</li>' +
-		'<li class="todo__text">Mock todo 2</li>' +
-		'<li class="todo__text">Mock todo 3</li>' +
-		'</ul>';
-
-        const todos: Todo[] = [
-            { text: 'Mock todo 1', done: false },
-            { text: 'Mock todo 2', done: false },
-            { text: 'Mock todo 3', done: false },
-        ]; 
-
-
-        // Act
-        functions.removeAllTodos(todos);
-
-
-        // Assert
-        expect(todos.length).toBe(0);
-       
-    }); */
 });
