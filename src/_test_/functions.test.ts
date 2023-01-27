@@ -5,6 +5,41 @@
 import * as functions from '../ts/functions';
 import { Todo } from '../ts/models/Todo';
 
+describe('everything with addTodo', () => {
+
+    test('should return success true', () => {
+
+        // Arrange
+        let text = 'burger'
+        let listOfTodos: Todo[] = []; 
+
+        // Act
+        let result = functions.addTodo(text, listOfTodos);
+
+        // Assert
+        expect(result.success).toBe(true);
+        expect(listOfTodos.length).toBe(1);
+
+    });
+
+    
+    test('should return success false', () => {
+
+          // Arrange
+          let text = 'b'
+          let listOfTodos: Todo[] = []; 
+  
+          // Act
+          let result = functions.addTodo(text, listOfTodos);
+  
+          // Assert
+          expect(result.success).toBe(false);
+          expect(listOfTodos.length).toBe(0);
+    });
+});
+
+
+
 describe('everything with changeTodo', () => {
 
        test('should change to done: true', () => {
@@ -55,6 +90,21 @@ describe('everything with changeTodo', () => {
 
 });
 
- 
+ describe('everything with removeAllTodos', () => {
+
+    test('should remove all todos', () => {
+
+        // Arrange
+        let listOfTodos: Todo[] = []; 
+        let todo1 = functions.addTodo('bagel', listOfTodos);
+        let todo2 = functions.addTodo('toast', listOfTodos);
+
+        // Act
+        listOfTodos.splice(0, listOfTodos.length);
+
+        // Assert
+        expect(listOfTodos.length).toBe(0);
+    });
+ }); 
 
 
